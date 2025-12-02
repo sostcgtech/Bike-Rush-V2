@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: da51756a30da2f448bfac5da99a381a9
+timeCreated: 1448560721
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 58376
+  packageName: GUI Cartoon Mobile Edition
+  packageVersion: 1.0
+  assetPath: Assets/GUI CARTOON/SCRIPTS/ChangeScene.cs
+  uploadId: 351207

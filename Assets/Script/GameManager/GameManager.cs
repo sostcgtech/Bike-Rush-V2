@@ -108,6 +108,10 @@ public class GameManager : MonoBehaviour
         // Resume game time
         Time.timeScale = 1f;
 
+        // Start spawning traffic and obstacles
+        if (WorldManager.Instance != null)
+            WorldManager.Instance.OnGameStart();
+
         Debug.Log("Game Started!");
     }
 
@@ -118,6 +122,10 @@ public class GameManager : MonoBehaviour
             return;
 
         Debug.Log("Player Crashed!");
+
+        // Stop spawning
+        if (WorldManager.Instance != null)
+            WorldManager.Instance.StopAllSystems();
 
         // Pause the game
         Time.timeScale = 0f;

@@ -345,6 +345,7 @@ UnityEngine.Application::get_isFocused
 UnityEngine.Application::get_isPlaying
 UnityEngine.Application::get_runInBackground
 UnityEngine.Application::OpenURL_Injected
+UnityEngine.Application::Quit
 UnityEngine.Application::get_cloudProjectId_Injected
 UnityEngine.Application::get_streamingAssetsPath_Injected
 UnityEngine.Application::get_platform
@@ -366,6 +367,9 @@ UnityEngine.AudioClip::get_samples_Injected
 UnityEngine.AudioClip::get_length_Injected
 UnityEngine.AudioSettings::StartAudioOutput
 UnityEngine.AudioSettings::StopAudioOutput
+UnityEngine.AudioSource::get_resource_Injected
+UnityEngine.AudioSource::PlayHelper_Injected
+UnityEngine.AudioSource::PlayOneShotHelper_Injected
 UnityEngine.Avatar::get_humanDescription_Injected
 UnityEngine.AvatarMask::GetHumanoidBodyPartActive_Injected
 UnityEngine.AvatarMask::get_transformCount_Injected
@@ -694,6 +698,7 @@ UnityEngine.GameObject::SetActive_Injected
 UnityEngine.GameObject::TryGetComponentFastPath_Injected
 UnityEngine.GameObject::get_scene_Injected
 UnityEngine.GameObject::set_layer_Injected
+UnityEngine.GameObject::set_tag_Injected
 UnityEngine.GeometryUtility::TestPlanesAABB_Injected
 UnityEngine.GeometryUtility::Internal_ExtractPlanes_Injected
 UnityEngine.Gizmos::DrawIcon_Injected
@@ -1082,6 +1087,7 @@ UnityEngine.Object::FindObjectFromInstanceID_Injected
 UnityEngine.Object::ForceLoadFromInstanceID_Injected
 UnityEngine.Object::Internal_CloneSingleWithParent_Injected
 UnityEngine.Object::Internal_CloneSingle_Injected
+UnityEngine.Object::Internal_InstantiateSingleWithParent_Injected
 UnityEngine.Object::Internal_InstantiateSingle_Injected
 UnityEngine.Object::DestroyImmediate_Injected
 UnityEngine.Object::Destroy_Injected
@@ -1093,7 +1099,6 @@ UnityEngine.Object::ToString_Injected
 UnityEngine.Object::set_hideFlags_Injected
 UnityEngine.Object::get_hideFlags_Injected
 UnityEngine.Object::FindObjectsByType
-UnityEngine.Object::FindObjectsOfType
 UnityEngine.ObjectDispatcher::CreateDispatchSystemHandle
 UnityEngine.ObjectDispatcher::DestroyDispatchSystemHandle
 UnityEngine.ObjectDispatcher::DispatchTransformDataChangesAndClear
@@ -1606,9 +1611,6 @@ UnityEngine.ResourcesAPIInternal::Load_Injected
 UnityEngine.ResourcesAPIInternal::UnloadAsset_Injected
 UnityEngine.ResourcesAPIInternal::FindObjectsOfTypeAll
 UnityEngine.Rigidbody::get_mass_Injected
-UnityEngine.Rigidbody::AddForce_Injected
-UnityEngine.Rigidbody::AddTorque_Injected
-UnityEngine.Rigidbody::get_angularVelocity_Injected
 UnityEngine.Rigidbody::get_linearVelocity_Injected
 UnityEngine.Rigidbody::set_constraints_Injected
 UnityEngine.Rigidbody::set_detectCollisions_Injected
@@ -1900,7 +1902,6 @@ UnityEngine.Transform::get_childCount_Injected
 UnityEngine.Transform::FindRelativeTransformWithPath_Injected
 UnityEngine.Transform::GetChild_Injected
 UnityEngine.Transform::GetParent_Injected
-UnityEngine.Transform::GetRoot_Injected
 UnityEngine.Transform::Internal_LookAt_Injected
 UnityEngine.Transform::InverseTransformDirection_Injected
 UnityEngine.Transform::InverseTransformPoint_Injected
@@ -1988,10 +1989,6 @@ UnityEngine.VFX.VFXManager::SetCameraBuffer_Injected
 UnityEngine.VFX.VFXManager::IsCameraBufferNeeded_Injected
 UnityEngine.VFX.VFXSpawnerState::Internal_Destroy
 UnityEngine.VFX.VisualEffect::get_visualEffectAsset_Injected
-UnityEngine.WheelCollider::GetWorldPose_Injected
-UnityEngine.WheelCollider::set_brakeTorque_Injected
-UnityEngine.WheelCollider::set_motorTorque_Injected
-UnityEngine.WheelCollider::set_steerAngle_Injected
 UnityEngine.XR.XRDevice::DisableAutoXRCameraTracking_Injected
 UnityEngine.XR.XRDisplaySubsystem::AddGraphicsThreadMirrorViewBlit_Injected
 UnityEngine.XR.XRDisplaySubsystem::GetMirrorViewBlitDesc_Injected

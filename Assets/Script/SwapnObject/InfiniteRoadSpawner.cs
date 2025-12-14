@@ -1,4 +1,3 @@
-//using System.Collections;
 //using System.Collections.Generic;
 //using UnityEngine;
 
@@ -8,28 +7,19 @@
 //    [SerializeField] private GameObject roadPrefab;
 //    [SerializeField] private int initialRoadCount = 5;
 //    [SerializeField] private float roadLength = 10f;
-//    [SerializeField] private Transform motorcycle;
-//    [SerializeField] private Vector3 spawnOffset = Vector3.zero; // Adjust this in inspector
 
-//    private List<GameObject> activeRoads = new List<GameObject>();
+//    [Header("Obstacle Settings")]
+//    [SerializeField] private GameObject[] obstaclePrefabs;   // Assign multiple obstacles
+//    [SerializeField] private int obstaclesPerRoad = 2;       // How many obstacles per road
+//    [SerializeField] private float laneWidth = 2f;           // Should match BikeMotorOnly
+
+//    private readonly List<GameObject> activeRoads = new List<GameObject>();
 //    private Vector3 nextSpawnPosition;
-//    private Quaternion nextSpawnRotation;
 //    private int roadsPassed = 0;
-//    private Transform lastRoad;
 
-//    void Start()
+//    private void Start()
 //    {
-//        // If motorcycle not assigned, try to find it
-//        if (motorcycle == null)
-//        {
-//            GameObject bike = GameObject.FindGameObjectWithTag("Player");
-//            if (bike == null) bike = GameObject.FindGameObjectWithTag("Motorcycle");
-//            if (bike != null) motorcycle = bike.transform;
-//        }
-
-//        // Start spawning from the spawner's position and rotation
 //        nextSpawnPosition = transform.position;
-//        nextSpawnRotation = transform.rotation;
 
 //        for (int i = 0; i < initialRoadCount; i++)
 //        {
@@ -37,45 +27,58 @@
 //        }
 //    }
 
-//    void SpawnRoad()
+//    private void SpawnRoad()
 //    {
-//        GameObject newRoad = Instantiate(roadPrefab, nextSpawnPosition, nextSpawnRotation);
+//        GameObject newRoad = Instantiate(roadPrefab, nextSpawnPosition, transform.rotation);
 //        activeRoads.Add(newRoad);
 
-//        // Add trigger component if not already present
+//        // Make sure road has trigger
 //        BoxCollider trigger = newRoad.GetComponent<BoxCollider>();
-//        if (trigger == null)
-//        {
-//            trigger = newRoad.AddComponent<BoxCollider>();
-//        }
+//        if (trigger == null) trigger = newRoad.AddComponent<BoxCollider>();
 //        trigger.isTrigger = true;
 
-//        // Add the trigger handler component
 //        RoadT roadTrigger = newRoad.GetComponent<RoadT>();
-//        if (roadTrigger == null)
-//        {
-//            roadTrigger = newRoad.AddComponent<RoadT>();
-//        }
+//        if (roadTrigger == null) roadTrigger = newRoad.AddComponent<RoadT>();
 //        roadTrigger.Initialize(this);
 
-//        // Move spawn position forward based on current rotation
-//        nextSpawnPosition += nextSpawnRotation * Vector3.forward * roadLength;
+//        // Spawn obstacles on this road
+//        SpawnObstacles(newRoad);
 
-//        // Update rotation to follow motorcycle if available
-//        if (motorcycle != null)
+//        nextSpawnPosition += transform.forward * roadLength;
+//    }
+
+//    private void SpawnObstacles(GameObject road)
+//    {
+//        if (obstaclePrefabs == null || obstaclePrefabs.Length == 0)
 //        {
-//            nextSpawnRotation = motorcycle.rotation;
+//            Debug.LogWarning("No obstacle prefabs assigned!");
+//            return;
+//        }
+
+//        for (int i = 0; i < obstaclesPerRoad; i++)
+//        {
+//            GameObject obstaclePrefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
+
+//            int lane = Random.Range(0, 3);
+//            float xPos = (lane - 1) * laneWidth;
+//            float zPos = Random.Range(0.5f, roadLength - 0.5f);
+
+//            Vector3 spawnPos = road.transform.position +
+//                              road.transform.forward * zPos +
+//                              road.transform.right * xPos;
+
+//            GameObject obs = Instantiate(obstaclePrefab, spawnPos, Quaternion.identity, road.transform);
+//            obs.tag = "Obstacle";
+
+//            Debug.Log($"Spawned obstacle at {spawnPos}"); // Debug to verify position
 //        }
 //    }
 
 //    public void OnRoadEntered()
 //    {
 //        roadsPassed++;
-
-//        // Spawn new road ahead
 //        SpawnRoad();
 
-//        // Remove the first road (the one we just passed) after entering the second road
 //        if (roadsPassed >= 2 && activeRoads.Count > 0)
 //        {
 //            GameObject oldRoad = activeRoads[0];
@@ -86,6 +89,7 @@
 //}
 
 
+//work code
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -96,6 +100,11 @@ public class InfiniteRoadSpawner : MonoBehaviour
     [SerializeField] private int initialRoadCount = 5;
     [SerializeField] private float roadLength = 10f;
 
+    [Header("Obstacle Settings")]
+    [SerializeField] private GameObject[] obstaclePrefabs;   // Assign multiple obstacles
+    [SerializeField] private int obstaclesPerRoad = 2;       // How many obstacles per road
+    [SerializeField] private float laneWidth = 2f;           // Should match BikeMotorOnly
+
     private readonly List<GameObject> activeRoads = new List<GameObject>();
     private Vector3 nextSpawnPosition;
     private int roadsPassed = 0;
@@ -104,7 +113,6 @@ public class InfiniteRoadSpawner : MonoBehaviour
     {
         nextSpawnPosition = transform.position;
 
-        // Spawn initial roads
         for (int i = 0; i < initialRoadCount; i++)
         {
             SpawnRoad();
@@ -113,41 +121,50 @@ public class InfiniteRoadSpawner : MonoBehaviour
 
     private void SpawnRoad()
     {
-        // Spawn road aligned to spawner's rotation
-        GameObject newRoad = Instantiate(
-            roadPrefab,
-            nextSpawnPosition,
-            transform.rotation   // <-- FIX: use spawner rotation
-        );
-
+        GameObject newRoad = Instantiate(roadPrefab, nextSpawnPosition, transform.rotation);
         activeRoads.Add(newRoad);
 
         // Make sure road has trigger
         BoxCollider trigger = newRoad.GetComponent<BoxCollider>();
-        if (trigger == null)
-            trigger = newRoad.AddComponent<BoxCollider>();
-
+        if (trigger == null) trigger = newRoad.AddComponent<BoxCollider>();
         trigger.isTrigger = true;
 
-        // Add road trigger script
         RoadT roadTrigger = newRoad.GetComponent<RoadT>();
-        if (roadTrigger == null)
-            roadTrigger = newRoad.AddComponent<RoadT>();
-
+        if (roadTrigger == null) roadTrigger = newRoad.AddComponent<RoadT>();
         roadTrigger.Initialize(this);
 
-        // Move spawn position forward based on spawner's forward direction
-        nextSpawnPosition += transform.forward * roadLength;   // <-- FIX: correct direction
+        // Spawn obstacles on this road
+        SpawnObstacles(newRoad);
+
+        nextSpawnPosition += transform.forward * roadLength;
+    }
+
+    private void SpawnObstacles(GameObject road)
+    {
+        for (int i = 0; i < obstaclesPerRoad; i++)
+        {
+            // Pick a random obstacle prefab
+            GameObject obstaclePrefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
+
+            // Pick a random lane
+            int lane = Random.Range(0, 3); // Assuming 3 lanes
+            float xPos = (lane - 1) * laneWidth; // Left=-1, Center=0, Right=1
+
+            // Pick a random Z position within the road length
+            float zPos = Random.Range(0.5f, roadLength - 0.5f);
+
+            // Instantiate obstacle
+            Vector3 spawnPos = road.transform.position + road.transform.forward * zPos + new Vector3(xPos, 0, 0);
+            GameObject obs = Instantiate(obstaclePrefab, spawnPos, Quaternion.identity, road.transform);
+            obs.tag = "Obstacle";
+        }
     }
 
     public void OnRoadEntered()
     {
         roadsPassed++;
-
-        // Always spawn a new road ahead
         SpawnRoad();
 
-        // Remove old road
         if (roadsPassed >= 2 && activeRoads.Count > 0)
         {
             GameObject oldRoad = activeRoads[0];
@@ -156,3 +173,75 @@ public class InfiniteRoadSpawner : MonoBehaviour
         }
     }
 }
+
+
+//using System.Collections.Generic;
+//using UnityEngine;
+
+//public class InfiniteRoadSpawner : MonoBehaviour
+//{
+//    [Header("Road Settings")]
+//    [SerializeField] private GameObject roadPrefab;
+//    [SerializeField] private int initialRoadCount = 5;
+//    [SerializeField] private float roadLength = 10f;
+
+//    private readonly List<GameObject> activeRoads = new List<GameObject>();
+//    private Vector3 nextSpawnPosition;
+//    private int roadsPassed = 0;
+
+//    private void Start()
+//    {
+//        nextSpawnPosition = transform.position;
+
+//        // Spawn initial roads
+//        for (int i = 0; i < initialRoadCount; i++)
+//        {
+//            SpawnRoad();
+//        }
+//    }
+
+//    private void SpawnRoad()
+//    {
+//        // Spawn road aligned to spawner's rotation
+//        GameObject newRoad = Instantiate(
+//            roadPrefab,
+//            nextSpawnPosition,
+//            transform.rotation   // <-- FIX: use spawner rotation
+//        );
+
+//        activeRoads.Add(newRoad);
+
+//        // Make sure road has trigger
+//        BoxCollider trigger = newRoad.GetComponent<BoxCollider>();
+//        if (trigger == null)
+//            trigger = newRoad.AddComponent<BoxCollider>();
+
+//        trigger.isTrigger = true;
+
+//        // Add road trigger script
+//        RoadT roadTrigger = newRoad.GetComponent<RoadT>();
+//        if (roadTrigger == null)
+//            roadTrigger = newRoad.AddComponent<RoadT>();
+
+//        roadTrigger.Initialize(this);
+
+//        // Move spawn position forward based on spawner's forward direction
+//        nextSpawnPosition += transform.forward * roadLength;   // <-- FIX: correct direction
+//    }
+
+//    public void OnRoadEntered()
+//    {
+//        roadsPassed++;
+
+//        // Always spawn a new road ahead
+//        SpawnRoad();
+
+//        // Remove old road
+//        if (roadsPassed >= 2 && activeRoads.Count > 0)
+//        {
+//            GameObject oldRoad = activeRoads[0];
+//            activeRoads.RemoveAt(0);
+//            Destroy(oldRoad);
+//        }
+//    }
+//}

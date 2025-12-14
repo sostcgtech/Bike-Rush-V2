@@ -18546,7 +18546,7 @@ IL_013b:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 91924
+// Method Definition Index: 91927
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SplineComputeBufferScope_1__ctor_m8F48E1BD9F4BDC71DD6E21A285AE893CBB23FCAA_gshared (SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342* __this, Il2CppFullySharedGenericAny ___0_spline, const RuntimeMethod* method) 
 {
 	const uint32_t SizeOf_T_t5D89AD2CF19129F10C0563844D627C81DEE3AFE9 = il2cpp_codegen_sizeof(il2cpp_rgctx_data_no_init(InitializedTypeInfo(method->klass)->rgctx_data, 0));
@@ -18590,7 +18590,7 @@ IL2CPP_EXTERN_C  void SplineComputeBufferScope_1__ctor_m8F48E1BD9F4BDC71DD6E21A2
 	_thisAdjusted = reinterpret_cast<SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342*>(__this + _offset);
 	SplineComputeBufferScope_1__ctor_m8F48E1BD9F4BDC71DD6E21A285AE893CBB23FCAA(_thisAdjusted, ___0_spline, method);
 }
-// Method Definition Index: 91925
+// Method Definition Index: 91928
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SplineComputeBufferScope_1_Bind_m3182383C7DC883C3ACE39002447DB9368EFEFCCA_gshared (SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342* __this, ComputeShader_tA7BDD0F6EE879D149480F5890BA2E665C50CFBF8* ___0_shader, int32_t ___1_kernel, String_t* ___2_info, String_t* ___3_curves, String_t* ___4_lengths, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -18722,7 +18722,7 @@ IL2CPP_EXTERN_C  void SplineComputeBufferScope_1_Bind_m3182383C7DC883C3ACE390024
 	_thisAdjusted = reinterpret_cast<SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342*>(__this + _offset);
 	SplineComputeBufferScope_1_Bind_m3182383C7DC883C3ACE39002447DB9368EFEFCCA(_thisAdjusted, ___0_shader, ___1_kernel, ___2_info, ___3_curves, ___4_lengths, method);
 }
-// Method Definition Index: 91926
+// Method Definition Index: 91929
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SplineComputeBufferScope_1_Dispose_mEE876909B6B78A54045C60584F3A053F7753E13F_gshared (SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342* __this, const RuntimeMethod* method) 
 {
 	ComputeBuffer_t51EADA9015EBCC1B982C5584E9AB2734415A8233* G_B2_0 = NULL;
@@ -18781,7 +18781,7 @@ IL2CPP_EXTERN_C  void SplineComputeBufferScope_1_Dispose_mEE876909B6B78A54045C60
 	_thisAdjusted = reinterpret_cast<SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342*>(__this + _offset);
 	SplineComputeBufferScope_1_Dispose_mEE876909B6B78A54045C60584F3A053F7753E13F(_thisAdjusted, method);
 }
-// Method Definition Index: 91927
+// Method Definition Index: 91930
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SplineComputeBufferScope_1_Upload_mC043A0BACC1453A7A5B34ABEC56F7CA2541E7C4E_gshared (SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -18973,7 +18973,7 @@ IL2CPP_EXTERN_C  void SplineComputeBufferScope_1_Upload_mC043A0BACC1453A7A5B34AB
 	_thisAdjusted = reinterpret_cast<SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342*>(__this + _offset);
 	SplineComputeBufferScope_1_Upload_mC043A0BACC1453A7A5B34ABEC56F7CA2541E7C4E(_thisAdjusted, method);
 }
-// Method Definition Index: 91928
+// Method Definition Index: 91931
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3 SplineComputeBufferScope_1_get_Info_m12134AE806940D911AC481C33FDAA9AFDF0D1561_gshared (SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342* __this, const RuntimeMethod* method) 
 {
 	void* L_0 = alloca(Il2CppFakeBoxBuffer::SizeNeededFor(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 0)));
@@ -19027,7 +19027,7 @@ IL2CPP_EXTERN_C  Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3 SplineCompute
 	_returnValue = SplineComputeBufferScope_1_get_Info_m12134AE806940D911AC481C33FDAA9AFDF0D1561(_thisAdjusted, method);
 	return _returnValue;
 }
-// Method Definition Index: 91929
+// Method Definition Index: 91932
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ComputeBuffer_t51EADA9015EBCC1B982C5584E9AB2734415A8233* SplineComputeBufferScope_1_get_Curves_m0FC66ADC585E75868C2AF065624C5CF751DA8535_gshared (SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19045,7 +19045,7 @@ IL2CPP_EXTERN_C  ComputeBuffer_t51EADA9015EBCC1B982C5584E9AB2734415A8233* Spline
 	_returnValue = SplineComputeBufferScope_1_get_Curves_m0FC66ADC585E75868C2AF065624C5CF751DA8535_inline(_thisAdjusted, method);
 	return _returnValue;
 }
-// Method Definition Index: 91930
+// Method Definition Index: 91933
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ComputeBuffer_t51EADA9015EBCC1B982C5584E9AB2734415A8233* SplineComputeBufferScope_1_get_CurveLengths_m528B0DF05C8A1CE75959BAE3D12D9C39C6E94F7A_gshared (SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19077,7 +19077,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR uint8_t* Array_GetRawSzArrayData_
 		return L_1;
 	}
 }
-// Method Definition Index: 52017
+// Method Definition Index: 52020
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector4__ctor_m96B2CD8B862B271F513AF0BDC2EABD58E4DBC813_inline (Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3* __this, float ___0_x, float ___1_y, float ___2_z, float ___3_w, const RuntimeMethod* method) 
 {
 	{
@@ -20761,7 +20761,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t SparselyPopulatedArrayAdd
 		return L_0;
 	}
 }
-// Method Definition Index: 91929
+// Method Definition Index: 91932
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ComputeBuffer_t51EADA9015EBCC1B982C5584E9AB2734415A8233* SplineComputeBufferScope_1_get_Curves_m0FC66ADC585E75868C2AF065624C5CF751DA8535_gshared_inline (SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342* __this, const RuntimeMethod* method) 
 {
 	{
@@ -20770,7 +20770,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ComputeBuffer_t51EADA9015EBCC1B98
 		return L_0;
 	}
 }
-// Method Definition Index: 91930
+// Method Definition Index: 91933
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ComputeBuffer_t51EADA9015EBCC1B982C5584E9AB2734415A8233* SplineComputeBufferScope_1_get_CurveLengths_m528B0DF05C8A1CE75959BAE3D12D9C39C6E94F7A_gshared_inline (SplineComputeBufferScope_1_tA9DD1D45FB91693C1CB0B18DBA4745FD7759B342* __this, const RuntimeMethod* method) 
 {
 	{

@@ -16,25 +16,19 @@
           },
           {
             "name": "AnimationClip",
-            "scenes": [
-              "Assets/Scenes/FinalTestLast.unity"
-            ],
+            "scenes": [],
             "dependencyType": 0,
             "icon": null
           },
           {
             "name": "Animator",
-            "scenes": [
-              "Assets/Scenes/FinalTestLast.unity"
-            ],
+            "scenes": [],
             "dependencyType": 0,
             "icon": null
           },
           {
             "name": "AnimatorController",
-            "scenes": [
-              "Assets/Scenes/FinalTestLast.unity"
-            ],
+            "scenes": [],
             "dependencyType": 1,
             "icon": null
           },
@@ -59,7 +53,7 @@
           {
             "name": "Motion",
             "scenes": [],
-            "dependencyType": 1,
+            "dependencyType": 0,
             "icon": null
           },
           {
@@ -89,7 +83,9 @@
           },
           {
             "name": "AudioClip",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/FinalTestLast.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
@@ -109,8 +105,10 @@
           },
           {
             "name": "AudioResource",
-            "scenes": [],
-            "dependencyType": 1,
+            "scenes": [
+              "Assets/Scenes/FinalTestLast.unity"
+            ],
+            "dependencyType": 0,
             "icon": null
           },
           {
@@ -264,7 +262,9 @@
           },
           {
             "name": "LightingSettings",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/FinalTestLast.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
@@ -743,12 +743,6 @@
             "icon": "package/com.unity.modules.vr"
           },
           {
-            "name": "Required by Vehicles Module",
-            "scenes": [],
-            "dependencyType": 2,
-            "icon": "package/com.unity.modules.vehicles"
-          },
-          {
             "name": "Required by XR Module",
             "scenes": [],
             "dependencyType": 2,
@@ -1065,12 +1059,6 @@
             "icon": "package/com.unity.modules.vr"
           },
           {
-            "name": "Required by Vehicles Module",
-            "scenes": [],
-            "dependencyType": 2,
-            "icon": "package/com.unity.modules.vehicles"
-          },
-          {
             "name": "Required by XR Module",
             "scenes": [],
             "dependencyType": 2,
@@ -1383,12 +1371,6 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.vr"
-          },
-          {
-            "name": "Required by Vehicles Module",
-            "scenes": [],
-            "dependencyType": 2,
-            "icon": "package/com.unity.modules.vehicles"
           },
           {
             "name": "Required by XR Module",
@@ -1761,17 +1743,6 @@
       {
         "name": "VR",
         "dependencies": []
-      },
-      {
-        "name": "Vehicles",
-        "dependencies": [
-          {
-            "name": "WheelCollider",
-            "scenes": [],
-            "dependencyType": 0,
-            "icon": null
-          }
-        ]
       },
       {
         "name": "XR",

@@ -9,18 +9,16 @@ public class GameManager : MonoBehaviour
 
     [Header("UI References")]
     public GameObject startScreen;              // Panel with start UI
-    public TextMeshProUGUI startText;           // "TAP TO START" text
+    public TextMeshProUGUI startText;           // Optional start text
     public TextMeshProUGUI titleText;           // Optional game title
+    public GameObject pauseScreen;              // Pause menu panel
+    public GameObject pauseButton;              // Pause button GameObject
 
     [Header("Game References")]
     public BikeMotorOnly bikeController;        // Reference to your bike script
 
-    [Header("Start Screen Settings")]
-    public bool animateStartText = true;        // Pulse/fade animation on start text
-    public float animationSpeed = 2f;           // Speed of text animation
-
     private bool gameStarted = false;
-    private float animTime = 0f;
+    private bool isPaused = false;
 
     void Awake()
     {
@@ -41,65 +39,53 @@ public class GameManager : MonoBehaviour
         // Ensure game starts paused
         Time.timeScale = 0f;
         gameStarted = false;
+        isPaused = false;
 
         // Show start screen
         if (startScreen != null)
             startScreen.SetActive(true);
 
+        // Hide pause screen
+        if (pauseScreen != null)
+            pauseScreen.SetActive(false);
+
         // Disable bike controller until game starts
         if (bikeController != null)
             bikeController.enabled = false;
+
+        // Hide pause button until game starts
+        if (pauseButton != null)
+            pauseButton.SetActive(false);
     }
 
     void Update()
     {
-        if (!gameStarted)
+        // Only handle ESC key for pause during gameplay
+        if (gameStarted)
         {
-            // Animate start text (optional pulsing effect)
-            if (animateStartText && startText != null)
+            // ESC key to pause/resume (optional)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                animTime += Time.unscaledDeltaTime * animationSpeed;
-                float alpha = Mathf.Lerp(0.5f, 1f, (Mathf.Sin(animTime) + 1f) / 2f);
-                Color c = startText.color;
-                c.a = alpha;
-                startText.color = c;
-            }
-
-            // Check for tap/click to start
-            bool inputDetected = false;
-
-            // Mouse/Touch input
-            if (Input.GetMouseButtonDown(0))
-            {
-                inputDetected = true;
-            }
-
-            // Mobile touch input
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-            {
-                inputDetected = true;
-            }
-
-            // Keyboard input (spacebar or Enter)
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
-            {
-                inputDetected = true;
-            }
-
-            if (inputDetected)
-            {
-                StartGame();
+                if (isPaused)
+                    ResumeGame();
+                else
+                    PauseGame();
             }
         }
     }
 
-    void StartGame()
+    // Call this from your Start button
+    public void StartGame()
     {
         gameStarted = true;
 
         // Hide start screen
         if (startScreen != null)
             startScreen.SetActive(false);
+
+        // Show pause button
+        if (pauseButton != null)
+            pauseButton.SetActive(true);
 
         // Enable bike controller
         if (bikeController != null)
@@ -113,6 +99,52 @@ public class GameManager : MonoBehaviour
             WorldManager.Instance.OnGameStart();
 
         Debug.Log("Game Started!");
+    }
+
+    public void PauseGame()
+    {
+        if (!gameStarted || isPaused)
+            return;
+
+        isPaused = true;
+        Time.timeScale = 0f;
+
+        // Show pause screen
+        if (pauseScreen != null)
+            pauseScreen.SetActive(true);
+
+        // Hide pause button
+        if (pauseButton != null)
+            pauseButton.SetActive(false);
+
+        // Optionally disable bike controller input
+        if (bikeController != null)
+            bikeController.enabled = false;
+
+        Debug.Log("Game Paused!");
+    }
+
+    public void ResumeGame()
+    {
+        if (!isPaused)
+            return;
+
+        isPaused = false;
+        Time.timeScale = 1f;
+
+        // Hide pause screen
+        if (pauseScreen != null)
+            pauseScreen.SetActive(false);
+
+        // Show pause button
+        if (pauseButton != null)
+            pauseButton.SetActive(true);
+
+        // Re-enable bike controller
+        if (bikeController != null)
+            bikeController.enabled = true;
+
+        Debug.Log("Game Resumed!");
     }
 
     // Called when player crashes
@@ -132,7 +164,6 @@ public class GameManager : MonoBehaviour
 
         // Optional: Show game over screen here
         // You can add a game over UI panel and show it
-
         // For now, restart after a delay (you can customize this)
         Invoke("RestartGame", 2f);
     }
@@ -151,7 +182,161 @@ public class GameManager : MonoBehaviour
     {
         return gameStarted;
     }
+
+    // Check if game is paused
+    public bool IsPaused()
+    {
+        return isPaused;
+    }
 }
+
+//this work
+//using UnityEngine;
+//using UnityEngine.UI;
+//using TMPro;
+
+//public class GameManager : MonoBehaviour
+//{
+//    // Singleton instance
+//    public static GameManager Instance { get; private set; }
+
+//    [Header("UI References")]
+//    public GameObject startScreen;              // Panel with start UI
+//    public TextMeshProUGUI startText;           // "TAP TO START" text
+//    public TextMeshProUGUI titleText;           // Optional game title
+
+//    [Header("Game References")]
+//    public BikeMotorOnly bikeController;        // Reference to your bike script
+
+//    [Header("Start Screen Settings")]
+//    public bool animateStartText = true;        // Pulse/fade animation on start text
+//    public float animationSpeed = 2f;           // Speed of text animation
+
+//    private bool gameStarted = false;
+//    private float animTime = 0f;
+
+//    void Awake()
+//    {
+//        // Singleton pattern
+//        if (Instance == null)
+//        {
+//            Instance = this;
+//        }
+//        else
+//        {
+//            Destroy(gameObject);
+//            return;
+//        }
+//    }
+
+//    void Start()
+//    {
+//        // Ensure game starts paused
+//        Time.timeScale = 0f;
+//        gameStarted = false;
+
+//        // Show start screen
+//        if (startScreen != null)
+//            startScreen.SetActive(true);
+
+//        // Disable bike controller until game starts
+//        if (bikeController != null)
+//            bikeController.enabled = false;
+//    }
+
+//    void Update()
+//    {
+//        if (!gameStarted)
+//        {
+//            // Animate start text (optional pulsing effect)
+//            if (animateStartText && startText != null)
+//            {
+//                animTime += Time.unscaledDeltaTime * animationSpeed;
+//                float alpha = Mathf.Lerp(0.5f, 1f, (Mathf.Sin(animTime) + 1f) / 2f);
+//                Color c = startText.color;
+//                c.a = alpha;
+//                startText.color = c;
+//            }
+
+//            // Check for tap/click to start
+//            bool inputDetected = false;
+
+//            // Mouse/Touch input
+//            if (Input.GetMouseButtonDown(0))
+//            {
+//                inputDetected = true;
+//            }
+
+//            // Mobile touch input
+//            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+//            {
+//                inputDetected = true;
+//            }
+
+//            // Keyboard input (spacebar or Enter)
+//            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+//            {
+//                inputDetected = true;
+//            }
+
+//            if (inputDetected)
+//            {
+//                StartGame();
+//            }
+//        }
+//    }
+
+//    void StartGame()
+//    {
+//        gameStarted = true;
+
+//        // Hide start screen
+//        if (startScreen != null)
+//            startScreen.SetActive(false);
+
+//        // Enable bike controller
+//        if (bikeController != null)
+//            bikeController.enabled = true;
+
+//        // Resume game time
+//        Time.timeScale = 1f;
+
+//        Debug.Log("Game Started!");
+//    }
+
+//    // Called when player crashes
+//    public void PlayerCrashed()
+//    {
+//        if (!gameStarted)
+//            return;
+
+//        Debug.Log("Player Crashed!");
+
+//        // Pause the game
+//        Time.timeScale = 0f;
+
+//        // Optional: Show game over screen here
+//        // You can add a game over UI panel and show it
+
+//        // For now, restart after a delay (you can customize this)
+//        Invoke("RestartGame", 2f);
+//    }
+
+//    // Public method to restart game (call this from a restart button)
+//    public void RestartGame()
+//    {
+//        Time.timeScale = 1f;
+//        UnityEngine.SceneManagement.SceneManager.LoadScene(
+//            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
+//        );
+//    }
+
+//    // Check if game has started (useful for other scripts)
+//    public bool IsGameStarted()
+//    {
+//        return gameStarted;
+//    }
+//}
 
 //using UnityEngine;
 //public class GameManager : MonoBehaviour
